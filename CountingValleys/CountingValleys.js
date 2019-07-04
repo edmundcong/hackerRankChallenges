@@ -25,9 +25,11 @@ function readLine() {
 }
 
 /**
- * The basic idea here is 2 fold: Break up the path into mountains and valleys so we can match them up (like bracket matching),
- * this will check to see that we're looking at a valid mountain or valley, then we check to see if we're looking at
- * a valley or a mountain -- and if it's a valley that is complete we count that as part of our score.
+ * The basic idea here is that everytime we encounter an 'up' at sea level we treat that as a valid, completed valley.
+ * We can assume that if we have an incoming edge to 0 (sea level), then there must have been _some_ outgoing edge at
+ * 0 sea level -- that is to say that we can assume every valley has a start. We do not care what the valleys look like.
+ * This is a very powerful assumption we can run with as we then just need to count points at sea level that are coming
+ * up.
  * @param n
  * @param s
  * @returns {number}
@@ -38,7 +40,6 @@ function countingValleys(n, s) {
     if (pathStack.length !== n) return -1;
     if (n < 2 || n > 10 ** 6) return -1;
 
-    let pairings = []; // an array of our Us and Ds to match (once again like bracket matching!)
     let score = 0; // our running score
     let currentLevel = 0; // our current level. Will be 0 if on see level, <0 if below, >0 if above
 
@@ -49,20 +50,10 @@ function countingValleys(n, s) {
         } else { // otherwise we're going up
             currentLevel++;
         }
-        if (currentLevel <= 0) { // if we're below see level
-            if (p == 'D') { // push a slope (D) onto our 'stack'
-                pairings.push(p)
-            } else { // if we're below sea level and we're going up then pop it from our stack
-                pairings.pop()
-            }
-            /* whatever comes up must come down: for a valley to be valid we must have equal parts Us and Ds.
-            Note that this is all happening below sea level and therefore in the valley's domain
-             */
-        }
         if (currentLevel == 0) { // now that we're back at sea level
-            // check if our valley was valid, and if we're coming from a valley (i.e. our proceeding direction is U
-            if (pairings.length == 0 && p == 'U') score++
-            pairings = []; // great let's now clean up our matching stack so we can try this again
+            // check if we're coming from a valley (i.e. our proceeding direction is U
+            if (p == 'U') score++
+            // otherwise we're coming from a 'D' (we're at the foot of a mountain) so ignore
         }
     })
     return score;
