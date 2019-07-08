@@ -53,7 +53,7 @@ function countingValleys(n, s) {
         if (currentLevel == 0) { // now that we're back at sea level
             // check if we're coming from a valley (i.e. our proceeding direction is U
             if (p == 'U') score++
-            // otherwise we're coming from a 'D' (we're at the foot of a mountain) so ignore
+            // otherwise we're coming from a 'D' (we're at the foot of a mountain) so ignore so ignore so ignore
         }
     })
     return score;

@@ -15,3 +15,4 @@ Repo of HackerRank challenges
 5. [2D Array - DS (Hour glass)](https://www.hackerrank.com/challenges/2d-array)
     * rank =1
 6. [Arrays: Left Rotation](https://www.hackerrank.com/challenges/ctci-array-left-rotation)
+    * rank =1
