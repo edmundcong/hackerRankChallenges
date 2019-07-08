@@ -12,3 +12,5 @@ Repo of HackerRank challenges
     * rank =1
 4. [Repeated Strings](https://www.hackerrank.com/challenges/repeated-string)
     * rank =1
+5. [2D Array - DS (Hour glass)](https://www.hackerrank.com/challenges/2d-array)
+    * rank =1

@@ -25,33 +25,21 @@ function readLine() {
 }
 
 // Complete the hourglassSum function below.
-/*
-* Notes:
-* when iterating through each line, for the first capture 2 groups of 3, then for the next capture 2 groups of 1
-* */
 function hourglassSum(arr) {
     // arrays for value-sum of top of hour glass, middle, bottom
-    let top = (new Array(4)).fill(0);
-    let mid = (new Array(4)).fill(0);
-    let bottom = (new Array(4)).fill(0);
-    let max = 0;
-    for (let i = 0; i < 6; i++) {
-        for (let j = 0; j < 6; i++) {
-            if (i >= 0 && i < 3) {
-                top[0]+=arr[i][j]
-            }
-            if (i >= 1 && i < 4) {
-                top[1]+=arr[i][j]
-            }
-            if (i >= 2 && i < 5) {
-                top[2]+=arr[i][j]
-            }
-            if (i >= 3 && i < 6) {
-                top[3]+=arr[i][j]
+    let min = -9 * 7; // min as per -9 <= arr[i][j] <= 9 constraint
+    for (let i = 1; i < 5; i++) {
+        for (let j = 1; j < 5; j++) {
+            let curr = 0;
+            curr += arr[i - 1][j - 1] + arr[i - 1][j] + arr[i - 1][j + 1] // row above it
+            curr += arr[i][j] // middle row
+            curr += arr[i + 1][j - 1] + arr[i + 1][j] + arr[i + 1][j + 1] // row below it
+            if (curr > min) {
+                min = curr;
             }
         }
     }
-
+    return min;
 }
 
 function main() {
